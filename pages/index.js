@@ -1,7 +1,7 @@
 
 import { selectAllSemester, addSubject, removeSubject, removeSemester, addSemester, calculateCGPA, CGPA } from '../state/cgpaSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import SEO from '../components/SEO'
+import SEO from '../component/SEO'
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 
