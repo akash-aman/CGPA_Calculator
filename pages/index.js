@@ -1,7 +1,7 @@
 
 import { selectAllSemester, addSubject, removeSubject, removeSemester, addSemester, calculateCGPA, CGPA } from '../state/cgpaSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { useRef } from 'react'
+import SEO from '../components/SEO'
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 
@@ -54,7 +54,7 @@ const Index = () => {
 
   return (
     <>
-
+      <SEO />
       <div className='h-screen w-screen p-8 bg-zinc-800'>
         <div className='flex h-4/5 gap-10 overflow-x-auto no-scrollbar'>
           {Object.entries(allSemester).map(item => {
