@@ -5,6 +5,8 @@
 
 ![Untitled](https://raw.githubusercontent.com/akash-aman/CGPA_Calculator/main/image/img2.png)
 
+![Untitled](https://raw.githubusercontent.com/akash-aman/CGPA_Calculator/main/image/img4.png)
+
 ## **Idea about building this Project**
 
 - Calculating CGPA is some time irritating 🤓 so thought of building one Application which include User Interactivity ❤️ & user Flexiblity . 
