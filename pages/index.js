@@ -1,12 +1,12 @@
 
-import { selectAllSemester, addSubject, removeSubject, removeSemester, addSemester, calculateCGPA,CGPA } from '../state/cgpaSlice'
+import { selectAllSemester, addSubject, removeSubject, removeSemester, addSemester, calculateCGPA, CGPA } from '../state/cgpaSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { useRef } from 'react' 
+import { useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 
 const Index = () => {
-  
+
   let [isOpen, setIsOpen] = useState(false)
 
   function closeModal() {
@@ -55,34 +55,41 @@ const Index = () => {
   return (
     <>
 
-      <div className='h-screen w-screen p-10 bg-zinc-800 overflow-clip to-'>
-        <div className='auto-cols-[minmax(400px,400px)] grid grid-flow-col h-5/6 no-scrollbar gap-10 overflow-auto'>
+      <div className='h-screen w-screen p-8 bg-zinc-800'>
+        <div className='flex h-4/5 gap-10 overflow-x-auto no-scrollbar'>
           {Object.entries(allSemester).map(item => {
             const semester = allSemester[item[0]]
             return <div
               key={item[0]}
-              className={`bg-gradient-to-br ${cardGradient[item[0]]} overflow-y-auto rounded-3xl drop-shadow-2xl p-10`}><h1 className='text-center text-lg text-slate-700 font-bold mb-3'>{item[0]} SEMESTER</h1><div className='relative overflow-y-auto text-zinc-50'>{
-                Object.entries(semester).map((subjects) => {
-                  if (subjects[0] === 'sgpa') {
-                    return
-                  }
-                  return <div
-                    className='grid grid-cols-4'
-                    key={subjects[0]} >
-                    <div >{subjects[0]}</div>
-                    <div className='grid justify-items-end'>{subjects[1].credit}</div>
-                    <div className='grid justify-items-end'>{subjects[1].marks}</div>
-                    <i className='grid justify-items-end'><button
-                      className='h-7 w-7 '
-                      onClick={() => dispatch(removeSubject({
-                        semester: item[0],
-                        subject: subjects[0]
-                      }))}
-                    >{cross}
-                    </button></i>
-                  </div>
+              className={`relative bg-gradient-to-br grid grid-rows-[35px_minmax(0,1fr)_270px] ${cardGradient[item[0]]} w-96 shrink-0 rounded-3xl drop-shadow-2xl p-10`}>
+              <h1 className='text-center h-10 text-lg text-slate-700 font-bold mb-3'>{item[0]} SEMESTER</h1>
+              <div className='shrink w-full overflow-y-auto text-zinc-50'>
 
-                })}</div>
+
+
+                {
+                  Object.entries(semester).map((subjects) => {
+                    if (subjects[0] === 'sgpa') {
+                      return
+                    }
+                    return <div
+                      className='grid grid-cols-4'
+                      key={subjects[0]} >
+                      <div >{subjects[0]}</div>
+                      <div className='grid justify-items-end'>{subjects[1].credit}</div>
+                      <div className='grid justify-items-end'>{subjects[1].marks}</div>
+                      <i className='grid justify-items-end'><button
+                        className='h-7 w-7 '
+                        onClick={() => dispatch(removeSubject({
+                          semester: item[0],
+                          subject: subjects[0]
+                        }))}
+                      >{cross}
+                      </button></i>
+                    </div>
+
+                  })}
+              </div>
 
               <form
                 onSubmit={(e) => {
@@ -97,7 +104,7 @@ const Index = () => {
                     }
                   }))
                   e.target.reset()
-                }} className='grid grid-flow-row absolute w-[80%] bottom-6'>
+                }} className=' flex flex-col w-[79%] min-h-max absolute left-10 bottom-6'>
                 <label className='block text-slate-100 text-sm font-bold mb-2' htmlFor="subject">Subject Code</label>
                 <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' type="text" required name="subjects" />
                 <label className='block text-slate-100 text-sm font-bold mb-2' htmlFor="credit">Credit </label>
@@ -107,33 +114,33 @@ const Index = () => {
                 <button className="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 w-[75%] mt-5">submit</button>
 
               </form>
-              <button className='h-[4rem] w-[4rem] fixed right-5 bottom-5'
+              <button className='h-[4rem] w-[4rem] absolute right-5 bottom-5'
                 onClick={() =>
                   dispatch(removeSemester({
                     semester: item[0]
                   }))}>{cross}</button>
             </div>
           })}
-         
 
-        
+
+
 
         </div>
-      
-          <button
-            type="button"
-            onClick={() => {
-              dispatch(calculateCGPA())
-              openModal()
-            }}
-              
-            className="fixed  grid  right-[11.5rem]  rounded-md pt-9 pb-9 bottom-12 text-white bg-gradient-to-br from-green-400 to-blue-600 bg-opacity-20 px-4 py-2 text-sm font-medium  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-          >
-            Calculate
-          </button>
- 
 
-       <form className='fixed grid pt-10 right-10 bottom-10'
+        <button
+          type="button"
+          onClick={() => {
+            dispatch(calculateCGPA())
+            openModal()
+          }}
+
+          className="fixed  grid  right-[11.5rem]  rounded-md pt-9 pb-9 bottom-7 text-white bg-gradient-to-br from-green-400 to-blue-600 bg-opacity-20 px-4 py-2 text-sm font-medium  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+        >
+          Calculate
+        </button>
+
+
+        <form className='fixed grid pt-10 right-10 bottom-5'
           onSubmit={(event) => {
             event.preventDefault()
             dispatch(addSemester({
@@ -151,7 +158,7 @@ const Index = () => {
             <option value="7">7 Sem</option>
             <option value="8">8 Sem</option>
           </select>
-          
+
           <button className='text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 mt-4'>Add Semester</button>
         </form>
 
@@ -187,7 +194,7 @@ const Index = () => {
                     className="text-lg font-medium leading-6 text-gray-900 pb-4 pl-4"
                   >
                     SGPA
-                    
+
                   </Dialog.Title>
                   <div className="">
 
@@ -195,18 +202,18 @@ const Index = () => {
                       const semester = allSemester[item[0]]
                       return <div
                         key={item[0]}
-                        ><div>{
-                          Object.entries(semester).map((subjects) => {
-                            if(subjects[0] == 'sgpa'){
-                              return <div className='grid grid-cols-3 justify-around' key={subjects[0]}>
-                                <div className=' ml-10 grid justify-items-start'>{item[0]} Semester</div> <hr className='mt-[0.9rem] grid justify-items-end'></hr>
-                                <div className=' ml-10 grid justify-items-center'>{parseFloat(subjects[1]).toFixed(2)} CGPA</div>
-                                
+                      ><div>{
+                        Object.entries(semester).map((subjects) => {
+                          if (subjects[0] == 'sgpa') {
+                            return <div className='grid grid-cols-3 justify-around' key={subjects[0]}>
+                              <div className=' ml-10 grid justify-items-start'>{item[0]} Semester</div> <hr className='mt-[0.9rem] grid justify-items-end'></hr>
+                              <div className=' ml-10 grid justify-items-center'>{parseFloat(subjects[1]).toFixed(2)} CGPA</div>
 
-                              </div>
-                            }
-                          
-                          })}</div>           
+
+                            </div>
+                          }
+
+                        })}</div>
                       </div>
                     })}
 
@@ -222,7 +229,7 @@ const Index = () => {
                   <div className='grid grid-cols-3 justify-around'>
                     <div className=' ml-10 grid justify-items-start'> Over All</div> <hr className='mt-[0.9rem] grid justify-items-end'></hr>
                     <div className=' ml-10 grid justify-items-center'>{parseFloat(cgpa).toFixed(2)} CGPA</div>
-                    </div>
+                  </div>
 
                   <div className="mt-4">
                     <button
