@@ -63,7 +63,7 @@ const Index = () => {
               key={item[0]}
               className={`relative bg-gradient-to-br grid grid-rows-[35px_minmax(0,1fr)_270px] ${cardGradient[item[0]]} w-96 shrink-0 rounded-3xl drop-shadow-2xl p-10`}>
               <h1 className='text-center h-10 text-lg text-slate-700 font-bold mb-3'>{item[0]} SEMESTER</h1>
-              <div className='shrink w-full overflow-y-auto text-zinc-50'>
+              <div className='shrink w-full overflow-y-auto text-zinc-50 no-scrollbar'>
 
 
 
