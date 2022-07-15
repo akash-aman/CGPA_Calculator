@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  next-app:
+    container_name: cgpa-app-development  
+    build:
+      context: ./
+      dockerfile: dev.Dockerfile
+    environment:
+      ENV_VARIABLE: ${ENV_VARIABLE}
+      NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
+    volumes:
+      - ./pages:/app/pages
+      - ./component:/app/component
+      - ./icons:/app/icons
+      - ./redux:/app/redux
+      - ./state:/app/state
+      - ./styles:/app/styles
+      - ./public:/app/public
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - my_network
+  # Add more containers below (nginx, postgres, etc.)
+
+  # Define a network, which allows containers to communicate
+  # with each other, by using their container name as a hostname
+networks:
+  my_network:
+    external: true

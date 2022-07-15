@@ -15,6 +15,54 @@
 - A much interactive UI💻, we can add more subjects, remove subjects, change the subjects marks💯, even add & remove semesters Card etc.
 
 
+
+## Run with Docker
+
+```
+docker build . -t cgpa
+```
+
+```
+docker container run -p 3000:3000 -d --name cgpa cgpa
+```
+
+## Run with Docker Compose
+
+- First Create my_network  
+
+```
+docker network create my_network
+```
+
+
+### Development build with docker compose
+
+- Run Container 
+
+```
+docker-compose -f .\docker-compose.dev.yml up -d
+```
+
+- Stop Container
+
+```
+docker-compose -f .\docker-compose.dev.yml down
+```
+
+### Production build with docker compose 
+
+- Run Container 
+
+```
+docker-compose -f .\docker-compose.prod.yml up -d
+```
+
+- Stop Container
+
+```
+docker-compose -f .\docker-compose.prod.yml down
+```
+
 ## How to run 
 
 - Installing pnpm 
@@ -34,6 +82,8 @@
     pnpm run build
     pnpm run start
 ```
+
+
 
 ## Image
 

@@ -11,7 +11,7 @@ const initialState = {
         "1": {
             "18MAT11": {
                 credit: 4,
-                marks: 69
+                marks: 69,
             },
             "18CHE12": {
                 credit: 4,
@@ -115,7 +115,7 @@ export const calculateCGPA = createAsyncThunk('addSubject', async (_, thunkAPI) 
         sgpa = 0
 
         for (var subject in state.semester[semester]) {
-            if(subject != "sgpa"){
+            if (subject != "sgpa") {
                 totalCredit += state.semester[semester][subject].credit
                 totalCreditXGP += getGP(state.semester[semester][subject].marks) * state.semester[semester][subject].credit
             }
@@ -124,7 +124,7 @@ export const calculateCGPA = createAsyncThunk('addSubject', async (_, thunkAPI) 
         if (totalCreditXGP != 0) {
             sgpa = totalCreditXGP / totalCredit
         }
-        
+
         thunkAPI.dispatch(updateSGPA({ semester, sgpa }))
         totalFinalCredit += totalCredit
         totalFinalCreditXGP += totalCreditXGP
